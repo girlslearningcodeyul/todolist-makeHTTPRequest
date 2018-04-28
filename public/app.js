@@ -2,7 +2,7 @@
 
 // Controlled input. This is similar to what you did in react.
 function inputChanged() {
-    this.setState({ formInput: event.target.value });
+    setState({ formInput: event.target.value });
 }
 
 // Don't try to understand the body of this function. You just 
