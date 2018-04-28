@@ -9,11 +9,11 @@ function inputChanged() {
 // need to understand what each parameter represents
 function makeHTTPRequest(meth, url, body, cb) {
     fetch(url, {
-        body: JSON.stringify(body),
+        body: body,
         method: meth
     })
         .then(response => response.text())
-        .then(responseBody => cb ? cb(JSON.parse(responseBody)) : undefined)
+        .then(responseBody => cb ? cb(responseBody) : undefined)
 }
 
 // We're going to try and stick with React's way of doing things
@@ -44,9 +44,10 @@ function setState(newState) {
 function sendItemToServer(item) {
     // This function is so short it could be inlined
     let cb = (itemsFromServer) => {
-        setState({ items: itemsFromServer })
+        let parsedItems = JSON.parse(itemsFromServer)
+        setState({ items: parsedItems })
     }
-    makeHTTPRequest('POST', '/addItem', item, cb)
+    makeHTTPRequest('POST', '/addItem', JSON.stringify(item), cb)
 }
 
 // When you submit the form, it sends the item to the server
@@ -57,7 +58,11 @@ function submitForm() {
 
 // When the client starts he needs to populate the list of items
 function getAllItems() {
-    makeHTTPRequest('GET', '/items', undefined, itemsFromServer => setState({ items: itemsFromServer }))
+    let cb = (itemsFromServer) => {
+        let parsedItems = JSON.parse(itemsFromServer)
+        setState({ items: parsedItems })
+    }
+    makeHTTPRequest('GET', '/items', undefined, cb)
 }
 
 // We define a function and then call it right away. I did this to structure the file.
