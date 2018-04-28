@@ -6,10 +6,11 @@ const bodyParser = require('body-parser')
 app.use(bodyParser.raw({ type: '*/*' }))
 
 
-// The following endpoints are so that the browser can load the HTML and Javascript
+// The following two endpoints are so that the browser can load the HTML and Javascript
 app.get('/', (req, res) => res.send(fs.readFileSync('./public/index.html').toString()))
 app.get('/app.js', (req, res) => res.send(fs.readFileSync('./public/app.js').toString()))
 
+// 
 let serverState = {
     items: []
 }
