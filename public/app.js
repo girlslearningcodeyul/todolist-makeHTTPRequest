@@ -17,7 +17,7 @@ function makeHTTPRequest(meth, path, body, cb) {
 }
 
 // We're going to try and stick with React's way of doing things
-let state = { items: ["buy milk", "go to store"], formInput: "" }
+let state = { items: [], formInput: "" }
 
 // Calling rerender changes the UI to reflect what's in the state
 
