@@ -7,8 +7,8 @@ function inputChanged() {
 
 // Don't try to understand the body of this function. You just 
 // need to understand what each parameter represents
-function makeHTTPRequest(meth, url, body, cb) {
-    fetch(url, {
+function makeHTTPRequest(meth, path, body, cb) {
+    fetch(path, {
         body: body,
         method: meth
     })
