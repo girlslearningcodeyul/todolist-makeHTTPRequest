@@ -8,9 +8,21 @@ app.use(bodyParser.raw({ type: '*/*' }))
 
 // The following two endpoints are so that the browser can load the HTML and Javascript
 app.get('/', (req, res) => res.send(fs.readFileSync('./public/index.html').toString()))
+
 app.get('/app.js', (req, res) => res.send(fs.readFileSync('./public/app.js').toString()))
 
-// 
+app.get('/clearItems', (req, res) => {
+serverState.items=[];
+res.send('items cleared from server')
+})
+
+app.get('/reverse', (req, res)=> {
+    let reversedItems = serverState.items.reverse(); 
+    console.log(reversedItems);
+    res.send(reversedItems)
+
+})
+ 
 let serverState = {
     items: []
 }
